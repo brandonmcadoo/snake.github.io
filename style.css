@@ -1,0 +1,43 @@
+body{
+    background-color : rgb(70, 70, 70);
+}
+
+
+
+/* index.html */
+.container{
+    display: block;
+    text-align: center;
+}
+.title{
+    color: white;
+    font-size: 100px;
+}
+.submitBtn{
+    background-color: #446adc;
+    color: white;
+    border-radius: 20px;
+    width: 600px;
+    height: 50px;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* game.html */
+#canvas{
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}

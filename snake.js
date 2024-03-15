@@ -106,6 +106,7 @@ function move(){
     } else {
         clearInterval(refreshIntervalId);
         alert("You Died")
+        window.location.href = "index.html";
     }
 
 }
