@@ -2,7 +2,7 @@
  * Snake game
  * 
  * @author Brandon McAdoo
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 
@@ -84,11 +84,13 @@ function setup(){
 }
 
 /**
- * Calls move every so many (speed) seconds
+ * Calls move() every so many (speed) seconds
  */
 function main(){
+    //srarts the movement of the snale
     run();
 
+    //recalls move() every so many seconds making the snake move.
     refreshIntervalId = setInterval(() => {
                             move()
                         }, speed);
@@ -100,12 +102,15 @@ function main(){
  * Calls drawSnake to redraw the snake.
  */
 function run(){
+    //new background
     ctx.fillStyle = 'grey'
     ctx.fillRect(10, 10, canvasWidth, canvasWidth); 
     ctx.closePath();    
     ctx.fill();
 
+    //draws food
     drawFood();
+    //draws snake
     drawSnake();
 }
 
@@ -113,6 +118,7 @@ function run(){
  * Draws the snake.
  */
 function drawSnake(){
+    //iterates through the entire pos array to draw every segment of the snake in white
     ctx.fillStyle = 'white'
     for(var i = 0; i < pos.length; i++){
         ctx.fillRect(pos[i][0], pos[i][1], width, width); 
@@ -129,8 +135,15 @@ function drawSnake(){
  * same place as another part of the snak body, and if so the snake dies.
  */
 function move(){
+    //creates a new array to hold the x and y position of the upper eft corner of the specified segment
     var newUpperLeft = [];
 
+    //checks to see which direction the snake shold be heading and selects 
+    //the new upperleft based off of the current x and y and direction
+    // 1: up
+    // 2: right
+    // 3: down
+    // 4: left
     if (lastPressed == 1){
         newUpperLeft = [pos[pos.length - 1][0], pos[pos.length - 1][1] - width];
     }
@@ -145,7 +158,9 @@ function move(){
     }
 
 
-
+    //if the head of the snake is in the same pos as the food then it 
+    //adds another segment to the snake to make it grow, otherwise it
+    //shifts the array down and sets the head to the new position
     if(newUpperLeft[0] == foodX && newUpperLeft[1] == foodY){
         pos.push(newUpperLeft);
         getFoodPos();
@@ -158,10 +173,11 @@ function move(){
         pos[pos.length - 1] = newUpperLeft;
     }
 
-
+    //checks to see if the snake is out of bounds or has hit itself
     death();
 
-    
+    //if the snake has moved into a legal space then the game continues
+    //if the snake has moved to an illegal space then the game is stopped
     if(running){
         run();
     } else {
@@ -191,9 +207,11 @@ function drawFood(){
  * occupied by part of the snale and if so it looks for a new pos.
  */
 function getFoodPos(){
+    //gets a random position on the "grid" for the food
     var tempX = (getRandomInt(canvasWidth / width) * width) + 10;
     var tempY = (getRandomInt(canvasWidth / width) * width) + 10;
 
+    //checks to make sure that the snake is not already occupying this space
     for(var i = 0; i < pos.length; i++){
         if(pos[i][0] == tempX && pos[i][1] == tempY){
             getFoodPos();
@@ -218,6 +236,7 @@ function getRandomInt(max) {
  * Checks to see if the head of the snake is out of bounds or if it has ran into itself.
  */
 function death(){
+    //checking for out of bounds
     for(var i = 0; i < pos.length; i++){
         if(pos[i][0] <= 0 || pos[i][1] <= 0 || pos[i][0] >= canvasWidth + 10 || pos[i][1] >= canvasWidth + 10 ){
             console.log("you died");
@@ -225,6 +244,7 @@ function death(){
         }
     }
 
+    //checking to see if the snake already occupies the new spot
     for(var i = 1; i < pos.length; i++){
         if(pos[0][0] == pos[i][0] && pos[0][1] == pos[i][1]){
             console.log("you died");
@@ -238,7 +258,7 @@ function death(){
  * The lastPresed var is updated to reflect the last input.
  */
 document.addEventListener("keydown", (event) =>{
-    console.log("entered listener")
+    //console.log("entered listener")
     var key = event.key;
     if(key == 'w' || key == 'ArrowUp'){
         lastPressed = 1;
