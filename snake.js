@@ -9,37 +9,25 @@
 //the canvas to be drawn on top of
 var canvas;
 var ctx;
-
 //the size of the canvas
 var canvasWidth;
 
-
-
 //var to keep the program running
 var running;
-
 //a var to end the refresh interval
 var refreshIntervalId;
 
-
-
 //array to hold the positions of the snake
 var pos;
-
 //the pos and size of the individual snake body pieces
 var upperLeft;
 var width;
-
 //the speed that the snake moves
 var speed;
-
-
 
 //the x and y of the food
 var foodX;
 var foodY;
-
-
 
 //the current direction
 var lastPressed;
@@ -55,7 +43,7 @@ function setup(){
     canvasWidth = 400;
 
     //initialize the snake variables
-    speed = 500
+    speed = 250
     width = canvasWidth / 20;
     upperLeft = [canvasWidth / 2 + 10, canvasWidth / 2 + 10];
     pos = [upperLeft];
@@ -212,14 +200,22 @@ function getFoodPos(){
     var tempY = (getRandomInt(canvasWidth / width) * width) + 10;
 
     //checks to make sure that the snake is not already occupying this space
+    var legal = true;
     for(var i = 0; i < pos.length; i++){
         if(pos[i][0] == tempX && pos[i][1] == tempY){
+            //console.log("Food generated inside snake body")
             getFoodPos();
+            legal = false;
         }
     }
+    if(legal){
+        foodX = tempX;
+        foodY = tempY;
+    }
 
-    foodX = tempX;
-    foodY = tempY;
+
+
+    
 }
 
 /**
