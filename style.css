@@ -21,7 +21,15 @@ body{
     height: 50px;
     font-size: 30px;
 }
-
+#scoretable{
+    margin: 50px;
+    color: white;
+    font-size: 25px;
+}
+#leaderboard{
+    font-size: 35px;
+    padding: 10px;
+}
 
 
 
