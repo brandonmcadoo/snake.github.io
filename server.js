@@ -1,3 +1,4 @@
+"use strict"
 const sqlite3 = require("sqlite3");
 const sqlite = require("sqlite");
 
@@ -5,7 +6,7 @@ const sqlite = require("sqlite");
 
 async function getDBConnection() {
     const db = await sqlite.open({
-        filename: "./Chinook_Sqlite.sqlite",
+        filename: "./results.sqlite", //This datbase file should exist
         driver: sqlite3.Database,
     });
 
@@ -13,12 +14,13 @@ async function getDBConnection() {
 }
 
 
-
-function updateLeaderboard() {
-    let db = getDBConnection();
+//This function should be async.
+async function updateLeaderboard() {
+    // Need to await here.!!
+    let db = await getDBConnection();
     const sqlString = "SELECT * FROM results limit 5";
     let rows = db.all(sqlString);
-    console.log(rows); snake.js
+    console.log(rows); //removed typo here
 
 
     rows.forEach((item) => {
@@ -43,4 +45,5 @@ function updateLeaderboard() {
 //     updateLeaderboard();
 // }, 5000);
 
-updateLeaderboard();
+updateLeaderboard().catch(console.error);
+// This is how you catch a async function
