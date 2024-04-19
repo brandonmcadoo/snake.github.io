@@ -1,6 +1,17 @@
 {
   "dependencies": {
+    "bootstrap": "^5.3.3",
+    "express": "^4.19.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "snake.github.io",
+  "description": "",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
 }

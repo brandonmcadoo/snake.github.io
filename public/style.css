@@ -5,25 +5,15 @@ body{
 
 
 /* index.html */
-.container{
-    display: block;
-    text-align: center;
+.container-fluid{
+    background-color : rgb(70, 70, 70);
 }
 .title{
     color: white;
     font-size: 100px;
 }
-.submitBtn{
-    background-color: #446adc;
-    color: white;
-    border-radius: 20px;
-    width: 600px;
-    height: 50px;
-    font-size: 30px;
-}
 #scoretable{
     margin: 50px;
-    color: white;
     font-size: 25px;
 }
 #leaderboard{

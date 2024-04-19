@@ -1,12 +1,17 @@
 "use strict"
+const express = require("express");
+
+const app = express();
+const port = 3000;
 const sqlite3 = require("sqlite3");
 const sqlite = require("sqlite");
+app.use('/public', express.static('public'));
 
 
 
 async function getDBConnection() {
     const db = await sqlite.open({
-        filename: "./results.sqlite", //This datbase file should exist
+        filename: "./results.db", //This datbase file should exist
         driver: sqlite3.Database,
     });
 
@@ -14,36 +19,20 @@ async function getDBConnection() {
 }
 
 
-//This function should be async.
-async function updateLeaderboard() {
-    // Need to await here.!!
+app.get("/lb", async (req, res) => {
     let db = await getDBConnection();
     const sqlString = "SELECT * FROM results limit 5";
-    let rows = db.all(sqlString);
-    console.log(rows); //removed typo here
-
-
-    rows.forEach((item) => {
-        let table = document.getElementById(scoretable);
-        let tableRow = document.createElement("tr");
-        let cell1 = document.createElement("td");
-        let cell2 = document.createElement("td");
-
-        let name = document.createTextNode(item.name);
-        let score = document.createTextNode(item.score);
-
-        cell1.appendChild(name);
-        cell2.appendChild(score);
-        tableRow.appendChild(cell1)
-        tableRow.appendChild(cell2)
-        table.appendChild(tableRow);
-    });
-}
+    let rows = await db.all(sqlString);
+    res.json(rows);
+  });
+  
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 
 
 // setInterval(() => {
 //     updateLeaderboard();
 // }, 5000);
-
-updateLeaderboard().catch(console.error);
+//updateLeaderboard().catch(console.error);
 // This is how you catch a async function
