@@ -19,23 +19,33 @@ let BASE_URL = "http://localhost:3000/lb"
     }
 
     function updateResults(data){
-        data.forEach((item) => {
-            console.log(data);
-            let table = document.getElementById("scoretable");
-            let tableRow = document.createElement("tr");
-            let cell1 = document.createElement("td");
-            let cell2 = document.createElement("td");
-        
-            let name = document.createTextNode(item.Name);
-            let score = document.createTextNode(item.Score);
-        
-            console.log(name);
-            console.log(score);
+        console.log(data)
+        let i = 1
+        data.forEach(item => {
+        let table = document.getElementById("scoretable");
+        let row = document.createElement("tr");
+        let cell1 = document.createElement("td");
+        let cell2 = document.createElement("td");
+        let cell3 = document.createElement("td");
 
-            cell1.appendChild(name);
-            cell2.appendChild(score);
-            tableRow.appendChild(cell1);
-            tableRow.appendChild(cell2);
-            table.appendChild(tableRow);
+        let place = document.createTextNode(i)
+        let name = document.createTextNode(item.Name);
+        let score = document.createTextNode(item.Score);
+
+        cell1.appendChild(place);
+        cell2.appendChild(name);
+        cell3.appendChild(score);
+
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+
+        table.appendChild(row)
+
+        i++;
         });
+        
+
+
+
     }

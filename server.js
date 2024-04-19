@@ -21,7 +21,7 @@ async function getDBConnection() {
 
 app.get("/lb", async (req, res) => {
     let db = await getDBConnection();
-    const sqlString = "SELECT * FROM results limit 5";
+    const sqlString = "SELECT * FROM results order by Score DESC limit 5";
     let rows = await db.all(sqlString);
     res.json(rows);
   });
